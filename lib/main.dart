@@ -1,18 +1,24 @@
+import 'package:animated_page_transition/animated_page_transition.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_scale_tap/flutter_scale_tap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_login_ui/login.dart';
+import 'package:simple_login_ui/splash_screen.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: SplashScreen(),
   ));
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
               ),
               const Text(
                 "Aroma Espresso",
-                style: TextStyle(fontFamily: "Go Letter", fontSize:40),
+                style: TextStyle(fontFamily: "Go Letter", fontSize: 40),
               ),
               // SizedBox(height: 15,),
               Expanded(
@@ -87,17 +93,20 @@ class MyApp extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ScaleTap(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Login()),
-                            );
-                          },
+                        PageTransitionButton(
+                          vsync: this,
+                          // onTap: () {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) => Login()),
+                          //   );
+                          // },
+                          nextPage: Login(),
                           child: Container(
                             decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Color.fromRGBO(74, 46, 44, 1), width: 1),
+                                border: Border.all(
+                                    color: Color.fromRGBO(74, 46, 44, 1),
+                                    width: 1),
                                 color: Colors.white,
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(15),
@@ -108,8 +117,8 @@ class MyApp extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.w600)),
                           ),
                         ),
-                        ScaleTap(
-                          onPressed: () {
+                        InkWell(
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Login()),
@@ -119,8 +128,9 @@ class MyApp extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 50),
                             decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Color.fromRGBO(74, 46, 44, 1), width: 1),
+                                border: Border.all(
+                                    color: Color.fromRGBO(74, 46, 44, 1),
+                                    width: 1),
                                 color: Colors.white54,
                                 borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(15),
