@@ -41,6 +41,7 @@ dependencies:
   flutter_scale_tap: ^1.0.5
   lottie: ^1.4.2
   animated_page_transition: ^0.0.1+2
+  transition: ^2.0.2
 
 dev_dependencies:
   flutter_test:

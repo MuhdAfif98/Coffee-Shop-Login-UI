@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_scale_tap/flutter_scale_tap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:simple_login_ui/homepage.dart';
+import 'package:transition/transition.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final TextEditingController username = TextEditingController();
+
   final TextEditingController password = TextEditingController();
 
   @override
@@ -123,7 +131,14 @@ class Login extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     ScaleTap(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                                context,
+                                Transition(
+                                    child: Homepage(),
+                                    transitionEffect:
+                                        TransitionEffect.RIGHT_TO_LEFT));
+                      },
                       child: Container(
                         decoration: const BoxDecoration(
                             color: Color.fromRGBO(74, 46, 44, 1),

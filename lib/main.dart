@@ -2,7 +2,9 @@ import 'package:animated_page_transition/animated_page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_login_ui/login.dart';
+import 'package:simple_login_ui/register.dart';
 import 'package:simple_login_ui/splash_screen.dart';
+import 'package:transition/transition.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -53,8 +55,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 ),
               ),
               const Text(
-                "Aroma Espresso",
-                style: TextStyle(fontFamily: "Go Letter", fontSize: 40),
+                "~ Coffee House ~",
+                style: TextStyle(fontFamily: "Go Letter", fontSize: 55),
               ),
               // SizedBox(height: 15,),
               Expanded(
@@ -93,15 +95,15 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        PageTransitionButton(
-                          vsync: this,
-                          // onTap: () {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context) => Login()),
-                          //   );
-                          // },
-                          nextPage: Login(),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                Transition(
+                                    child: Register(),
+                                    transitionEffect:
+                                        TransitionEffect.RIGHT_TO_LEFT));
+                          },
                           child: Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
@@ -120,9 +122,11 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                         InkWell(
                           onTap: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Login()),
-                            );
+                                context,
+                                Transition(
+                                    child: Login(),
+                                    transitionEffect:
+                                        TransitionEffect.RIGHT_TO_LEFT));
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
