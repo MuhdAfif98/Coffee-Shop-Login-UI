@@ -175,7 +175,7 @@ class _HomepageState extends State<Homepage> {
                   height: 200,
                   child: GridView.count(
                     primary: false,
-                    padding: const EdgeInsets.all(  ),
+                    padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
