@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_scale_tap/flutter_scale_tap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:simple_login_ui/model/coffee.dart';
 
 import 'model/category.dart';
 
@@ -22,6 +24,14 @@ class _HomepageState extends State<Homepage> {
     Category("Starbucks", false),
     Category("Espresso", false),
     Category("Latte", false),
+  ];
+
+  List<Coffee> coffee = [
+    Coffee("assets/coffee/americano.png", "Hot Americano", "with sugar", "90"),
+    Coffee("assets/coffee/americano.png", "Hot Americano", "with sugar", "90"),
+    Coffee("assets/coffee/americano.png", "Hot Americano", "with sugar", "90"),
+    Coffee("assets/coffee/americano.png", "Hot Americano", "with sugar", "90"),
+    Coffee("assets/coffee/americano.png", "Hot Americano", "with sugar", "90"),
   ];
 
   @override
@@ -107,6 +117,8 @@ class _HomepageState extends State<Homepage> {
               SizedBox(
                 height: 50,
                 child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: cat.length,
                   itemBuilder: (context, index) {
@@ -151,69 +163,173 @@ class _HomepageState extends State<Homepage> {
                   },
                 ),
               ),
-              SizedBox(height: 15,),
-              Expanded(
-                child: SizedBox(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return const SizedBox(
-                        width: 150,
-                  
-                        child: Card(
-                          child: Text('data'),
+              const SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: coffee.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 63, 64, 66),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Column(children: [
+                            Image.asset(
+                              coffee[index].image,
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                              width: 120,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    coffee[index].coffee_name,
+                                    style: GoogleFonts.aladin(
+                                        textStyle: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Text(
+                                    coffee[index].coffee_description,
+                                    style: GoogleFonts.robotoSlab(
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey[400],
+                                            fontWeight: FontWeight.normal)),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        r'$ ' + coffee[index].cost,
+                                        style: GoogleFonts.aladin(
+                                            textStyle: const TextStyle(
+                                                fontSize: 20,
+                                                color: Color.fromRGBO(
+                                                    195, 147, 80, 1),
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                      const Icon(
+                                        Iconsax.add_circle,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ]),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              const Text("Special made for you"),
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  child: GridView.count(
-                    primary: false,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[100],
-                        child: const Text("He'd have you all unravel at the"),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[200],
-                        child: const Text('Heed not the rabble'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[300],
-                        child: const Text('Sound of screams but the'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[400],
-                        child: const Text('Who scream'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[500],
-                        child: const Text('Revolution is coming...'),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.teal[600],
-                        child: const Text('Revolution, they...'),
-                      ),
-                    ],
-                  ),
+              const SizedBox(
+                height: 15,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Special made for you",
+                  style: GoogleFonts.robotoSlab(
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              //Special for you coffee
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: coffee.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: 150,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical:5.0),
+                        child: ScaleTap(
+                          onPressed: (){},
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 63, 64, 66),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Latte Premium",
+                                    style: GoogleFonts.aladin(
+                                        textStyle: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Text(
+                                    "with bird nest",
+                                    style: GoogleFonts.robotoSlab(
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey[400],
+                                            fontWeight: FontWeight.normal)),
+                                  ),
+                                  Text(
+                                    r'$ ' + coffee[index].cost,
+                                    style: GoogleFonts.aladin(
+                                        textStyle: const TextStyle(
+                                            fontSize: 20,
+                                            color:
+                                                Color.fromRGBO(195, 147, 80, 1),
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
+                              ),
+                              Image.asset(
+                                "assets/coffee/latte.png",
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                                width: 120,
+                              ),
+                            ]),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
